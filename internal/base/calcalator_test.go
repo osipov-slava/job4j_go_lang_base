@@ -1,9 +1,10 @@
 package base_test
 
 import (
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"job4j.ru/go-lang-base/internal/base"
-	"testing"
 )
 
 func Test_Add(t *testing.T) {
@@ -12,5 +13,4 @@ func Test_Add(t *testing.T) {
 	expected := 3
 
 	assert.Equal(t, rsl, expected)
-
 }
