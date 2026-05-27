@@ -1,7 +1,21 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"job4j.ru/go-lang-base/internal/base"
+)
 
 func main() {
-	fmt.Println("Hello World")
+	var first *base.Node
+
+	if first == nil {
+		fmt.Println("nil pointer is used")
+		first = &base.Node{
+			Key:   "first",
+			Value: "first",
+		}
+	}
+
+	fmt.Printf("Node{key: %s, value: %s}\n", first.Key, first.Value)
 }
