@@ -7,15 +7,15 @@ import (
 )
 
 func main() {
-	var first *base.Node
+	cache := base.NewLruCache(3)
 
-	if first == nil {
-		fmt.Println("nil pointer is used")
-		first = &base.Node{
-			Key:   "first",
-			Value: "first",
-		}
+	cache.Put("first", "111")
+	cache.Put("second", "222")
+	cache.Put("third", "333")
+	cache.Put("forth", "444")
+	addr := cache.Get("third")
+	if addr != nil {
+		res := *addr
+		fmt.Println(res)
 	}
-
-	fmt.Printf("Node{key: %s, value: %s}\n", first.Key, first.Value)
 }
