@@ -1,21 +1,14 @@
 package main
 
 import (
-	"fmt"
-
-	"job4j.ru/go-lang-base/internal/base"
+	"job4j.ru/go-lang-base/internal/tracker"
 )
 
 func main() {
-	cache := base.NewLruCache(3)
-
-	cache.Put("first", "111")
-	cache.Put("second", "222")
-	cache.Put("third", "333")
-	cache.Put("forth", "444")
-	addr := cache.Get("third")
-	if addr != nil {
-		res := *addr
-		fmt.Println(res)
+	ui := tracker.UI{
+		In:      tracker.ConsoleInput{},
+		Out:     tracker.ConsoleOutput{},
+		Tracker: tracker.NewTracker(),
 	}
+	ui.Run()
 }
