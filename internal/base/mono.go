@@ -1,6 +1,5 @@
 package base
 
-// Mono 0 - equals, 1 - increase , -1 = decrease
 func Mono(nums []int) bool {
 	size := len(nums)
 	if size == 0 || size == 1 {

@@ -16,7 +16,10 @@ func (u AddUsecase) Done(in Input, out Output, tracker *Tracker) {
 	out.Out("enter name:")
 	name := in.Get()
 	id := uuid.New().String()
-	tracker.AddItem(Item{Name: name, ID: id})
+	err := tracker.AddItem(Item{Name: name, ID: id})
+	if err != nil {
+		fmt.Println(err)
+	}
 }
 
 type GetUsecase struct{}
@@ -34,10 +37,9 @@ func (u UpdateUsecase) Done(in Input, out Output, tracker *Tracker) {
 	id := in.Get()
 	out.Out("enter NEW name:")
 	name := in.Get()
-	if tracker.UpdateItem(id, name) {
-		fmt.Println("Update success")
-	} else {
-		fmt.Println("Update failed")
+	err := tracker.UpdateItem(Item{id, name})
+	if err != nil {
+		fmt.Println(err)
 	}
 }
 
