@@ -61,7 +61,6 @@ func (l *LruCache) Get(key string) *string {
 		if cursorNode.Key == key {
 			result := cursorNode.Value
 
-			// AI code
 			if l.Head != cursorNode {
 				if cursorNode.Prev != nil {
 					cursorNode.Prev.Next = cursorNode.Next

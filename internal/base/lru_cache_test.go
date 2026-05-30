@@ -49,8 +49,6 @@ func Test_LruCache(t *testing.T) {
 		cache.Put("key2", "value2")
 		cache.Put("key3", "value3")
 
-		// key1 must be in the tail
-		// after get() key1 move to the head
 		cache.Get("key1")
 
 		assert.Equal(t, "key1", cache.Head.Key)
@@ -67,7 +65,6 @@ func Test_LruCache(t *testing.T) {
 		cache.Put("key2", "value2")
 		cache.Put("key3", "value3") // key1
 
-		// key1 must evict
 		val := cache.Get("key1")
 		assert.Nil(t, val)
 
@@ -91,14 +88,12 @@ func Test_LruCache(t *testing.T) {
 		cache.Get("key2")
 		cache.Get("key1")
 
-		// expected order: key1, key2, key3
 		assert.Equal(t, "key1", cache.Head.Key)
 		assert.Equal(t, "key2", cache.Head.Next.Key)
 		assert.Equal(t, "key3", cache.Head.Next.Next.Key)
 
 		cache.Put("key4", "value4")
 
-		// key3 must evict
 		assert.Nil(t, cache.Get("key3"))
 		assert.NotNil(t, cache.Get("key1"))
 		assert.NotNil(t, cache.Get("key2"))

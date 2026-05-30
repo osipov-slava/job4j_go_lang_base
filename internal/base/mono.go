@@ -1,11 +1,12 @@
 package base
 
+// Mono 0 - equals, 1 - increase , -1 = decrease
 func Mono(nums []int) bool {
 	size := len(nums)
 	if size == 0 || size == 1 {
 		return true
 	}
-	direction := 0 // 0 - equals, 1 - increase , -1 = decrease
+	direction := 0
 
 	if nums[0] < nums[size-1] {
 		direction = 1
