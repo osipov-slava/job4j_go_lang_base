@@ -4,8 +4,9 @@ import (
 	"context"
 	"log"
 
+	"github.com/gofiber/fiber/v2"
 	"job4j.ru/go-lang-base/internal/config"
-	"job4j.ru/go-lang-base/internal/tracker"
+	"job4j.ru/go-lang-base/internal/tracker/api"
 	"job4j.ru/go-lang-base/internal/tracker/db"
 	"job4j.ru/go-lang-base/internal/tracker/repository"
 )
@@ -30,13 +31,13 @@ func main() {
 
 	repo := repository.NewRepoPg(pool)
 
-	ui := tracker.UI{
-		In:    tracker.ConsoleInput{},
-		Out:   tracker.ConsoleOutput{},
-		Store: repo,
-	}
+	server := api.NewServer(repo)
 
-	if err := ui.Run(ctx); err != nil {
+	app := fiber.New()
+	server.Route(app.Group("/api"))
+
+	err = app.Listen(":8080")
+	if err != nil {
 		log.Fatal(err)
 	}
 }
