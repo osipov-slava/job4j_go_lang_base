@@ -10,7 +10,7 @@ import (
 func Test_Validate(t *testing.T) {
 	t.Parallel()
 
-	t.Run("[1, 2, 3] - true", func(t *testing.T) {
+	t.Run("ValidateRequest is undefined", func(t *testing.T) {
 		t.Parallel()
 
 		var req *base.ValidateRequest
@@ -20,7 +20,7 @@ func Test_Validate(t *testing.T) {
 		assert.Equal(t, "ValidateRequest is undefined!", rsl[0])
 	})
 
-	t.Run("[1, 2, 3] - true", func(t *testing.T) {
+	t.Run("All fields are undefined", func(t *testing.T) {
 		t.Parallel()
 
 		req := base.ValidateRequest{
@@ -36,7 +36,7 @@ func Test_Validate(t *testing.T) {
 		assert.Equal(t, "Title is empty!", rsl[2])
 	})
 
-	t.Run("[1, 2, 3] - true", func(t *testing.T) {
+	t.Run("Some fields are undefined", func(t *testing.T) {
 		t.Parallel()
 
 		req := base.ValidateRequest{
@@ -51,7 +51,7 @@ func Test_Validate(t *testing.T) {
 		assert.Equal(t, "Title is empty!", rsl[1])
 	})
 
-	t.Run("[1, 2, 3] - true", func(t *testing.T) {
+	t.Run("Correct struct", func(t *testing.T) {
 		t.Parallel()
 
 		req := base.ValidateRequest{
@@ -61,8 +61,7 @@ func Test_Validate(t *testing.T) {
 		}
 		rsl := base.Validate(&req)
 
-		assert.Equal(t, 1, len(rsl))
-		assert.Equal(t, "All Ok", rsl[0])
+		assert.Equal(t, 0, len(rsl))
 	})
 
 }
