@@ -21,8 +21,5 @@ func Validate(req *ValidateRequest) []string {
 	if req.Title == "" {
 		res = append(res, "Title is empty!")
 	}
-	if len(res) == 0 {
-		res = append(res, "All Ok")
-	}
 	return res
 }
