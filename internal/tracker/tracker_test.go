@@ -53,6 +53,8 @@ func Test_Tracker(t *testing.T) {
 		}
 
 		err := tracker.AddItem(item)
+		assert.NoError(t, err)
+
 		err = tracker.AddItem(item)
 		assert.ErrorIs(t, err, ErrIdNoUnique)
 	})

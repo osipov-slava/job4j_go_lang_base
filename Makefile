@@ -1,6 +1,8 @@
 # Переменные
 GO := go
-GO_PKG := ./...
+GO_PKG := ./cmd/app
+BINARY_NAME := myapp
+BUILD_DIR := ./bin
 
 # Цель по умолчанию
 .PHONY: help
@@ -10,8 +12,17 @@ help:
 	@echo "  coverage    - Run tests and generate HTML coverage report"
 	@echo "  cover       - Alias for coverage"
 	@echo "  lint        - Run golangci-lint"
+	@echo "  build       - Build the application"
 	@echo "  all         - Run lint, tests and coverage"
 	@echo "  help        - Show this help"
+
+# Сборка приложения
+.PHONY: build
+build:
+	@echo "Building application..."
+	@mkdir -p $(BUILD_DIR)
+	$(GO) build -o $(BUILD_DIR)/$(BINARY_NAME) $(GO_PKG)
+	@echo "✅ Build complete: $(BUILD_DIR)/$(BINARY_NAME)"
 
 # Запуск всех тестов
 .PHONY: test
