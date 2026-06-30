@@ -16,10 +16,10 @@ type GetItemsResponse struct {
 }
 
 func (s *Server) GetItems(c *fiber.Ctx) error {
-	items := make([]tracker.Item, 0)
+	var items []tracker.Item
 	var err error
 
-	name := c.Params("name")
+	name := c.Query("name")
 	if name != "" {
 		// Если указан фрагмент для поиска
 		items, err = s.Repository.FindByName(c.Context(), name)
@@ -27,7 +27,7 @@ func (s *Server) GetItems(c *fiber.Ctx) error {
 		items, err = s.Repository.List(c.Context())
 	}
 	if err != nil {
-		log.Errorw("s.Repository.List", err)
+		log.Error("s.Repository.List", err)
 		return fiber.NewError(fiber.StatusInternalServerError, "internal server error")
 	}
 

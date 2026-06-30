@@ -18,7 +18,7 @@ func (s *Server) UpdateItem(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusBadRequest, "name is required")
 	}
 
-	item := tracker.Item{req.ID, req.Name}
+	item := tracker.Item{ID: req.ID, Name: req.Name}
 	err := s.Repository.Update(c.Context(), req.ID, item)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {

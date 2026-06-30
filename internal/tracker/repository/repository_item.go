@@ -66,7 +66,11 @@ func (r *RepoPg) Get(ctx context.Context, id string) (tracker.Item, error) {
 }
 
 func (r *RepoPg) FindByName(ctx context.Context, name string) ([]tracker.Item, error) {
-	rows, err := r.pool.Query(ctx, `select id, name from items where name like '%$1%'`, name)
+	searchPattern := "%" + name + "%"
+	rows, err := r.pool.Query(ctx,
+		`SELECT id, name FROM items WHERE name LIKE $1`,
+		searchPattern,
+	)
 	if err != nil {
 		return nil, err
 	}
